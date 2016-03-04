@@ -13,11 +13,17 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<codefarm.version>4.2.4</codefarm.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.codefarm</groupId>
+			<artifactId>spring-util</artifactId>
+			<version>${codefarm.version}</version>
 		</dependency>
 	</dependencies>
 </project>
