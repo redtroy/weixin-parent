@@ -4,6 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<modules>
 		<module>weixin-service</module>
+		<module>weixin-webapp</module>
 	</modules>
 	<groupId>cn.fhcard</groupId>
 	<artifactId>weixin-parent</artifactId>
