@@ -16,6 +16,8 @@
 		<spring.version>4.2.4.RELEASE</spring.version>
 		<codefarm.version>4.2.4</codefarm.version>
 		<aspectj.version>1.8.8</aspectj.version>
+		<weixin.version>1.0</weixin.version>
+		<log4j.version>1.2.9</log4j.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -25,6 +27,12 @@
 				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+			<groupId>com.codefarm</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${codefarm.version}</version>
+			<scope>test</scope>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

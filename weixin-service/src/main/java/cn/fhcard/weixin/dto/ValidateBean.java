@@ -65,4 +65,11 @@ public class ValidateBean
     {
         this.echostr = echostr;
     }
+    
+    @Override
+    public String toString()
+    {
+        return " [signature=" + signature + ", timestamp=" + timestamp
+                + ", nonce=" + nonce + ", echostr=" + echostr + "]";
+    }
 }

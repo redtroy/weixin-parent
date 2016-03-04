@@ -12,7 +12,7 @@
 			</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring/mvc/mvc-config.xml</param-value>
+      <param-value>classpath:config/mvc/mvc-config.xml</param-value>
     </init-param>
   </servlet>
   <listener>

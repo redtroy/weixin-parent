@@ -28,7 +28,7 @@
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>classpath:weixin.properties</value>
+			<value>classpath:config/weixin.properties</value>
 		</property>
 		<property name="fileEncoding" value="utf-8" />
 	</bean>

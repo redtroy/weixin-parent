@@ -13,11 +13,16 @@
 	<name>weixin-webapp Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.codefarm</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<!-- 基础依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -34,11 +39,18 @@
 			<version>3.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 业务依赖 -->
+		<dependency>
+			<groupId>cn.fhcard</groupId>
+			<artifactId>weixin-service</artifactId>
+			<version>${weixin.version}</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
-		<finalName>weixin-webapp</finalName>
+		<finalName>weixin</finalName>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>2.1</version>
 				<executions>
@@ -56,13 +68,13 @@
 					<type>jar</type>
 					<outputDirectory>${project.build.directory}/libs</outputDirectory>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+					<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
 				</configuration>
 			</plugin>
 		</plugins>
