@@ -13,8 +13,11 @@ import com.codefarm.spring.modules.util.Encodes;
 
 import cn.fhcard.weixin.dto.ValidateBean;
 
+/**
+ * @author zhangjian
+ *
+ */
 @Service
-
 public class WeixinValidateService
 {
     private static final Logger logger = LoggerFactory

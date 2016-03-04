@@ -24,12 +24,21 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		class="com.codefarm.spring.modules.beanfactory.CustomizedPropertyPlaceholderConfigurer">
 		<property name="location">
 			<value>classpath:config/weixin.properties</value>
 		</property>
 		<property name="fileEncoding" value="utf-8" />
+	</bean>
+
+	<bean class="cn.fhcard.weixin.service.SystemLoader"></bean>
+
+	<bean id="cacheManager" class="com.codefarm.cache.manager.HierarchicalCacheManager"
+		lazy-init="false" init-method="initCacheProvider">
+		<property name="configFile">
+			<value>classpath:config/cache.properties</value>
+		</property>
 	</bean>
 </beans>
