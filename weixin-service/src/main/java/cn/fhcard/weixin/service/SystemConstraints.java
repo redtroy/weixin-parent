@@ -1,5 +1,9 @@
 package cn.fhcard.weixin.service;
 
+/**
+ * @author zhangjian
+ *
+ */
 public class SystemConstraints
 {
     private static String appId;

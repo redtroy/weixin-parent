@@ -2,6 +2,10 @@ package cn.fhcard.weixin.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author zhangjian
+ *
+ */
 public class AccessToken
 {
     @JsonProperty(value = "access_token")

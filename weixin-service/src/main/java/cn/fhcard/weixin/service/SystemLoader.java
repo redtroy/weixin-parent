@@ -6,6 +6,10 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 import com.codefarm.spring.modules.beanfactory.CustomizedPropertyPlaceholderConfigurer;
 
+/**
+ * @author zhangjian
+ *
+ */
 public class SystemLoader implements BeanFactoryPostProcessor
 {
     
