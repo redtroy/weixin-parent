@@ -2,12 +2,19 @@ package cn.fhcard.weixin.service;
 
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import com.codefarm.spring.modules.util.Digests;
+import com.codefarm.spring.modules.util.Encodes;
 
 import cn.fhcard.weixin.dto.ValidateBean;
 
+@Service
+
 public class WeixinValidateService
 {
+    @Value("${token}")
     private String token;
     
     public boolean isValid(ValidateBean bean)
@@ -17,9 +24,9 @@ public class WeixinValidateService
         StringBuilder builder = new StringBuilder();
         String string = builder.append(arr[0])
                 .append(arr[1])
-                .append(arr[3])
+                .append(arr[2])
                 .toString();
-        byte[] sha1 = Digests.sha1(string.getBytes());
+        String sha1 = Encodes.encodeHex(Digests.sha1(string.getBytes()));
         return sha1.equals(bean.getSignature());
     }
 }
