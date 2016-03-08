@@ -39,13 +39,18 @@
 			<version>3.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
 		<!-- 业务依赖 -->
 		<dependency>
 			<groupId>cn.fhcard</groupId>
 			<artifactId>weixin-service</artifactId>
 			<version>${weixin.version}</version>
 		</dependency>
-		
 	</dependencies>
 	<build>
 		<finalName>weixin</finalName>
