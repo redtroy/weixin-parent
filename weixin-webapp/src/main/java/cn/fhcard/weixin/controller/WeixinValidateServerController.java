@@ -22,7 +22,7 @@ public class WeixinValidateServerController
     @Autowired
     private WeixinValidateServerService validateService;
     
-    @RequestMapping("echo")
+    @RequestMapping("echo.html")
     @ResponseBody
     public String echo(ValidateBean bean)
     {
