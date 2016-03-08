@@ -14,20 +14,21 @@ import cn.fhcard.weixin.dto.ValidateBean;
 public class WeixinValidateServiceTest
 {
     @Autowired
-    private WeixinValidateService validateService;
+    private WeixinValidateServerService validateService;
     
     @Test
     public void test()
     {
-        String signature = "5a6452383fbbad6bb1dad7bc2878d725ce63c544";
-        String timestamp = "1457064619";
-        String nonce = "953725108";
-        String echostr = "5460338271577521919";
+        String signature = "b8a9919684f7f2c895e828e75b230eddc4d5bc55";
+        String timestamp = "1457410808";
+        String nonce = "802212947";
+        String echostr = "6101491049654319099";
         ValidateBean bean = new ValidateBean();
         bean.setSignature(signature);
         bean.setTimestamp(timestamp);
         bean.setNonce(nonce);
         bean.setEchostr(echostr);
+        System.out.println(validateService.isValid(bean));
         Assert.isTrue(validateService.isValid(bean));
     }
     

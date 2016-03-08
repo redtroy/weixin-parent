@@ -2,6 +2,7 @@ package cn.fhcard.weixin.service;
 
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,29 +11,34 @@ import org.springframework.stereotype.Service;
 import com.codefarm.cache.manager.CacheLevel;
 import com.codefarm.cache.manager.HierarchicalCacheManager;
 import com.codefarm.spring.modules.util.HttpClient;
-import com.codefarm.spring.modules.util.JsonMapper;
 import com.codefarm.spring.modules.util.MessageFormatter;
 import com.codefarm.spring.modules.util.StringUtils;
 
+import cn.fhcard.weixin.JsonUtil;
 import cn.fhcard.weixin.dto.AccessToken;
+import cn.fhcard.weixin.dto.IpAddrs;
 
 /**
  * @author zhangjian
  *
  */
 @Service
-public class WeixinAccessTokenService
+public class WeixinBasicService
 {
     private static final Logger logger = LoggerFactory
-            .getLogger(WeixinAccessTokenService.class);
+            .getLogger(WeixinBasicService.class);
     
     @Value("${access-token-url}")
     private String accessTokenUrl;
     
+    @Value("${ip-url}")
+    private String ipUrl;
+    
     private HttpClient http = new HttpClient();
     
-    public String getToken()
+    public String getAccessToken()
     {
+        String response = null;
         String url = MessageFormatter.arrayFormat(accessTokenUrl,
                 SystemConstraints.getAppId(),
                 SystemConstraints.getAppSecret());
@@ -50,9 +56,8 @@ public class WeixinAccessTokenService
                 return accessToken;
             }
             logger.info("访问远程地址：{}", url);
-            String result = http.get(url);
-            AccessToken token = JsonMapper.nonEmptyMapper().fromJson(result,
-                    AccessToken.class);
+            response = http.get(url);
+            AccessToken token = JsonUtil.fromJson(response, AccessToken.class);
             HierarchicalCacheManager.set(CacheLevel.REDIS,
                     SystemConstraints.WEIXIN_CACHE_NAME,
                     SystemConstraints.WEIXIN_ACCESS_TOKEN_KEY,
@@ -66,8 +71,30 @@ public class WeixinAccessTokenService
         
         catch (IOException e)
         {
-            logger.error("获取微信AccessToken失败：{}", e);
+            logger.error("获取微信AccessToken失败,错误码：{}\n{}", response, e);
         }
         return null;
     }
+    
+    public String[] getIpList()
+    {
+        String response = null;
+        String url = MessageFormatter.arrayFormat(ipUrl, getAccessToken());
+        try
+        {
+            response = http.get(url);
+            IpAddrs ipList = JsonUtil.fromJson(response, IpAddrs.class);
+            return ipList.getIpList();
+        }
+        catch (ClientProtocolException e)
+        {
+            logger.error("获取微信IP列表失败，错误码：{}\n{}", response, e);
+        }
+        catch (IOException e)
+        {
+            logger.error("获取微信IP列表失败，错误码：{}\n{}", response, e);
+        }
+        return null;
+    }
+    
 }

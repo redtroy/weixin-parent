@@ -18,10 +18,10 @@ import cn.fhcard.weixin.dto.ValidateBean;
  *
  */
 @Service
-public class WeixinValidateService
+public class WeixinValidateServerService
 {
     private static final Logger logger = LoggerFactory
-            .getLogger(WeixinValidateService.class);
+            .getLogger(WeixinValidateServerService.class);
     
     @Value("${token}")
     private String token;

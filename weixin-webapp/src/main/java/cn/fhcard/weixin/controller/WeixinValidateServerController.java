@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.fhcard.weixin.dto.ValidateBean;
-import cn.fhcard.weixin.service.WeixinValidateService;
+import cn.fhcard.weixin.service.WeixinValidateServerService;
 
 @Controller
 @RequestMapping("/validate")
-public class WeixinValidateController
+public class WeixinValidateServerController
 {
-    private static final String FAIL = "";
+    private static final String FAIL = "FAIL";
     
     private static final Logger logger = LoggerFactory
-            .getLogger(WeixinValidateController.class);
+            .getLogger(WeixinValidateServerController.class);
     
     @Autowired
-    private WeixinValidateService validateService;
+    private WeixinValidateServerService validateService;
     
     @RequestMapping("echo")
     @ResponseBody
