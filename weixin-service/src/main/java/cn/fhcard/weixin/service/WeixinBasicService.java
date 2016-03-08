@@ -17,6 +17,7 @@ import com.codefarm.spring.modules.util.StringUtils;
 import cn.fhcard.weixin.JsonUtil;
 import cn.fhcard.weixin.dto.AccessToken;
 import cn.fhcard.weixin.dto.IpAddrs;
+import cn.fhcard.weixin.exception.WeixinServiceException;
 
 /**
  * @author zhangjian
@@ -36,7 +37,7 @@ public class WeixinBasicService
     
     private HttpClient http = new HttpClient();
     
-    public String getAccessToken()
+    public String getAccessToken() throws WeixinServiceException
     {
         String response = null;
         String url = MessageFormatter.arrayFormat(accessTokenUrl,
@@ -72,11 +73,11 @@ public class WeixinBasicService
         catch (IOException e)
         {
             logger.error("获取微信AccessToken失败,错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
-        return null;
     }
     
-    public String[] getIpList()
+    public String[] getIpList() throws WeixinServiceException
     {
         String response = null;
         String url = MessageFormatter.arrayFormat(ipUrl, getAccessToken());
@@ -89,12 +90,13 @@ public class WeixinBasicService
         catch (ClientProtocolException e)
         {
             logger.error("获取微信IP列表失败，错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
         catch (IOException e)
         {
             logger.error("获取微信IP列表失败，错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
-        return null;
     }
     
 }

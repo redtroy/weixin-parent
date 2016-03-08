@@ -14,17 +14,17 @@
                         http://www.springframework.org/schema/aop
                         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd"
 	default-lazy-init="true">
-	<!-- <import resource="classpath*:spring/database-config.xml" />
-	<import resource="classpath*:spring/applicationContext-shiro.xml" /> -->
+	<!-- <import resource="classpath*:spring/database-config.xml" /> <import 
+		resource="classpath*:spring/applicationContext-shiro.xml" /> -->
 	<!-- <import resource="classpath*:spring/fast-dfs.xml" /> -->
-<!-- 	<import resource="classpath*:spring/mybatis-shard.xml" /> -->
-	<!-- <import resource="classpath*:spring/quartz_job.xml" />  -->
+	<!-- <import resource="classpath*:spring/mybatis-shard.xml" /> -->
+	<!-- <import resource="classpath*:spring/quartz_job.xml" /> -->
 	<!-- <import resource="classpath*:spring/applicationContext-csrf.xml" /> -->
 	<!-- <task:annotation-driven /> -->
 	<context:annotation-config />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-	<context:component-scan base-package="cn.fhcard.weixin.service">
+	<context:component-scan base-package="cn.fhcard.weixin">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"
@@ -35,16 +35,23 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="propertyConfigurer"
 		class="com.codefarm.spring.modules.beanfactory.CustomizedPropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>classpath:/config/weixin.properties</value>
+		<property name="locations">
+			<list>
+				<value>classpath:/config/weixin.properties</value>
+				<value>classpath:/config/system.properties</value>
+			</list>
 		</property>
 		<property name="fileEncoding" value="utf-8" />
 	</bean>
 
-	<bean class="cn.fhcard.weixin.service.SystemLoader"></bean>
+	<bean class="cn.fhcard.weixin.service.SystemLoader">
+		<property name="errFileLocation">
+			<value>classpath:/config/errors.properties</value>
+		</property>
+	</bean>
 
 	<bean id="cacheManager" class="com.codefarm.cache.manager.HierarchicalCacheManager"
 		lazy-init="false" init-method="initCacheProvider">
@@ -52,4 +59,5 @@
 			<value>classpath:/config/cache.properties</value>
 		</property>
 	</bean>
+	<aop:aspectj-autoproxy />
 </beans>

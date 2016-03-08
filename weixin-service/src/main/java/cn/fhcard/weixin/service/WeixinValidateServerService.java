@@ -12,6 +12,7 @@ import com.codefarm.spring.modules.util.Digests;
 import com.codefarm.spring.modules.util.Encodes;
 
 import cn.fhcard.weixin.dto.ValidateBean;
+import cn.fhcard.weixin.exception.WeixinServiceException;
 
 /**
  * @author zhangjian
@@ -26,7 +27,7 @@ public class WeixinValidateServerService
     @Value("${token}")
     private String token;
     
-    public boolean isValid(ValidateBean bean)
+    public boolean isValid(ValidateBean bean) throws WeixinServiceException
     {
         logger.info("处理微信验证服务器：{}", bean.toString());
         Assert.hasText(bean.getEchostr(), "EchoStr can't be empty");

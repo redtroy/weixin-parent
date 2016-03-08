@@ -14,6 +14,7 @@ import com.codefarm.spring.modules.util.MessageFormatter;
 
 import cn.fhcard.weixin.JsonUtil;
 import cn.fhcard.weixin.dto.UserBean;
+import cn.fhcard.weixin.exception.WeixinServiceException;
 
 @Service
 public class WeixinUserService
@@ -29,7 +30,7 @@ public class WeixinUserService
     
     HttpClient http = new HttpClient();
     
-    public UserBean getUser(String openId)
+    public UserBean getUser(String openId) throws WeixinServiceException
     {
         String accessToken = basicService.getAccessToken();
         String response = null;
@@ -46,11 +47,12 @@ public class WeixinUserService
         catch (ClientProtocolException e)
         {
             logger.error("通过OpenID获取用户信息失败：{}", e);
+            throw new WeixinServiceException(e);
         }
         catch (IOException e)
         {
             logger.error("通过OpenID获取用户信息失败：{}", e);
+            throw new WeixinServiceException(e);
         }
-        return null;
     }
 }

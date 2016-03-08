@@ -14,6 +14,7 @@ import com.codefarm.spring.modules.util.MessageFormatter;
 import cn.fhcard.weixin.JsonUtil;
 import cn.fhcard.weixin.dto.OAuthAccessToken;
 import cn.fhcard.weixin.dto.UserBean;
+import cn.fhcard.weixin.exception.WeixinServiceException;
 
 @Service
 public class WeixinOAuthService
@@ -30,6 +31,7 @@ public class WeixinOAuthService
     private HttpClient http = new HttpClient();
     
     public OAuthAccessToken getOAuthToken(String code)
+            throws WeixinServiceException
     {
         
         String url = MessageFormatter.arrayFormat(oauthTokenUrl,
@@ -49,15 +51,17 @@ public class WeixinOAuthService
         catch (ClientProtocolException e)
         {
             logger.error("获取微信OAuth AccessToken失败,错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
         catch (IOException e)
         {
             logger.error("获取微信OAuth AccessToken失败,错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
-        return null;
     }
     
     public UserBean getOAuthUser(OAuthAccessToken accessToken)
+            throws WeixinServiceException
     {
         logger.info("获取OAuth用户信息:{}", accessToken.toString());
         String url = MessageFormatter.arrayFormat(oauthUseUrl,
@@ -73,11 +77,12 @@ public class WeixinOAuthService
         catch (ClientProtocolException e)
         {
             logger.error("获取OAuth用户失败,错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
         catch (IOException e)
         {
             logger.error("获取OAuth用户失败,错误码：{}\n{}", response, e);
+            throw new WeixinServiceException(e);
         }
-        return null;
     }
 }
