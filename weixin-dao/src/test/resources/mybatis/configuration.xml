@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties>
+		<property name="dialect" value="oracle" />
+	</properties>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="callSettersOnNulls" value="true" />
+	</settings>
+	<typeHandlers>
+		<typeHandler
+			handler="cn.fhcard.weixin.dao.typehandler.OAuthScropEnumTypeHandler"
+			javaType="cn.fhcard.weixin.enums.OAuthScope" />
+		<typeHandler
+			handler="cn.fhcard.weixin.dao.typehandler.SexEnumTypeHandler"
+			javaType="cn.fhcard.weixin.enums.Sex" />
+		<typeHandler
+			handler="cn.fhcard.weixin.dao.typehandler.SubscribeEnumTypeHandler"
+			javaType="cn.fhcard.weixin.enums.Subscribe" />
+	</typeHandlers>
+	<plugins>
+		<plugin
+			interceptor="com.codefarm.mybatis.pagination.interceptor.PaginationInterceptor"></plugin>
+	</plugins>
+	<mappers>
+		<mapper resource="mybatis/mapper/WeixinUserMapper.xml" />
+		<!-- <mapper resource="mybatis/mapper/FunctionMapper.xml" /> -->
+	</mappers>
+
+</configuration>

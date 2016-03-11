@@ -2,7 +2,6 @@ package cn.fhcard.weixin.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import cn.fhcard.weixin.service.WeixinUserService;
 @RequestMapping(value = "/oauth")
 public class WeixinOAuthController
 {
-    private static final Logger logger = LoggerFactory
+    private static final Logger logger = org.slf4j.LoggerFactory
             .getLogger(WeixinOAuthController.class);
     
     @Autowired

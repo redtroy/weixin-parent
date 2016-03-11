@@ -5,6 +5,7 @@
 	<modules>
 		<module>weixin-service</module>
 		<module>weixin-webapp</module>
+		<module>weixin-dao</module>
 	</modules>
 	<groupId>cn.fhcard</groupId>
 	<artifactId>weixin-parent</artifactId>
